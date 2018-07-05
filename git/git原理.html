@@ -1,0 +1,404 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>git · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="git原理.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="git原理.html">
+            
+                <a href="git原理.html">
+            
+                    
+                    git
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.1.1" data-path="git原理.html">
+            
+                <a href="git原理.html">
+            
+                    
+                    git原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    .git文件夹
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >git</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="git&#x539F;&#x7406;">Git&#x539F;&#x7406;</h2>
+<p><img src="https://dn-coding-net-production-pp.qbox.me/fc5a194b-8ad0-4fd6-8c7a-fb26062bd3fb.png" alt=""></p>
+<h2 id="git&#x6587;&#x4EF6;&#x5939;">Git&#x6587;&#x4EF6;&#x5939;</h2>
+<pre><code>1.&#x914D;&#x7F6E;&#x6587;&#x4EF6;
+2.&#x94A9;&#x5B50;&#xFF08;hooks&#xFF09;
+3.&#x7F13;&#x5B58;&#x533A;&#xFF08;index&#xFF09;
+4.&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x5E93;&#xFF08;objct database&#xFF09;
+</code></pre><h3 id="object-database">object database</h3>
+<blockquote>
+<p>object database &#x5B58;&#x653E;&#x56DB;&#x79CD;&#x6587;&#x4EF6;&#xFF1A;1.blob 2.tree 3.commit 4.tag</p>
+<p>object database&#x4E2D;&#x5B58;&#x653E;2&#x79CD;&#x683C;&#x5F0F;&#x7684;&#x6587;&#x4EF6;&#x4E00;&#x79CD;&#x662F;&#x677E;&#x6563;&#x683C;&#x5F0F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8FDB;&#x884C;&#x4E86;hash-1&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x662F;.pack.idx&#x7684;&#x6253;&#x5305;&#x683C;&#x5F0F;</p>
+<p>blob&#x5BF9;&#x8C61;&#x7684;hash&#x8BA1;&#x7B97; content = (type + cotent.size + \0)(header&#x6307;&#x9488;) + coetent &#x5C06;&#x52A0;&#x5165;&#x4E86;&#x6307;&#x9488;&#x5185;&#x5BB9;&#x7684;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x8FDB;&#x884C;hash-1&#x8BA1;&#x7B97;</p>
+</blockquote>
+<p><img src="../img/1.jpeg" alt=""></p>
+<h4 id="git-gc">git gc</h4>
+<blockquote>
+<p>&#x540C;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x4E86;&#x5F88;&#x5C11;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x7528;git gc&#x5BF9;&#x5176;&#x6253;&#x5305;&#x751F;&#x6210;.pack&#x6587;&#x4EF6;&#xFF0C;.idx&#x6587;&#x4EF6;&#xFF0C;&#x5C06;&#x6BCF;&#x6B21;&#x4FEE;&#x6539;&#x7684;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x538B;&#x7F29;&#x653E;&#x5165;&#x5230;.pack&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;idx&#x6587;&#x4EF6;&#x5B58;&#x653E;&#x6307;&#x5411;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;&#x6307;&#x9488;</p>
+</blockquote>
+<p><img src="../img/2.jpeg" alt=""></p>
+<h4 id="blob&#x5BF9;&#x8C61;">blob&#x5BF9;&#x8C61;</h4>
+<p><img src="../img/3.jpeg" alt=""></p>
+<h4 id="tree&#x5BF9;&#x8C61;">tree&#x5BF9;&#x8C61;</h4>
+<blockquote>
+<p>tree&#x5BF9;&#x8C61;&#x7684;hash = (tree + cotent.size + \0) + inode&#x4FE1;&#x606F;&#xFF08;mode + type  + &#x5757;&#x6307;&#x9488;&#xFF09; + &#x6587;&#x4EF6;&#x540D;</p>
+</blockquote>
+<p><img src="../img/4.jpeg" alt="">
+<img src="../img/5.jpeg" alt=""></p>
+<h4 id="commit&#x5BF9;&#x8C61;">commit&#x5BF9;&#x8C61;</h4>
+<blockquote>
+<p>commit&#x6307;&#x5411;&#x7684;&#x662F;&#x9879;&#x76EE;&#x9876;&#x7EA7;&#x76EE;&#x5F55;&#x4E0B;&#x7684;tree</p>
+<p>commit&#x5BF9;&#x8C61; hash = (commit + cotent.size \0) + content</p>
+<p>parent&#x6307;&#x9488;&#x4F5C;&#x7528;&#x662F;&#x6307;&#x5411;&#x4E0A;&#x4E00;&#x4E2A;commit
+tree&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x662F;&#x5F53;&#x524D;&#x7248;&#x672C;&#x4E0B;&#x7684;&#x9876;&#x7EA7;tree&#x4F4D;&#x7F6E;</p>
+<p>&#x5F53;&#x524D;&#x7248;&#x672C;&#x53EA;&#x53EF;&#x80FD;&#x6307;&#x5411;&#x4E00;&#x4E2A;tree&#x6587;&#x4EF6;&#xFF0C;&#x56E0;&#x4E3A;commit&#x53EA;&#x53EF;&#x80FD;&#x6307;&#x5411;&#x9876;&#x7EA7;tree&#xFF0C;&#x4F46;&#x5F53;&#x524D;commit&#x53EF;&#x80FD;&#x6307;&#x5411;&#x591A;&#x4E2A;&#x7236;commit&#xFF0C;&#x56E0;&#x4E3A;&#x5408;&#x5E76;&#x540E;&#x7684;&#x5206;&#x652F;&#x662F;&#x591A;&#x4E2A;</p>
+</blockquote>
+<p><img src="../img/6.jpeg" alt="">
+<img src="../img/7.jpeg" alt="">
+<img src="../img/8.jpeg" alt=""></p>
+<h4 id="tag&#x5BF9;&#x8C61;">tag&#x5BF9;&#x8C61;</h4>
+<blockquote>
+<p>tag&#x5BF9;&#x8C61; hash = (tag + cotent.size \0) + content</p>
+<p>object&#x6307;&#x9488; &#x901A;&#x5E38;&#x6307;&#x5411;&#x88AB;&#x6253;&#x6807;&#x7B7E;&#x5BF9;&#x8C61;commit
+type &#x8868;&#x660E;&#x88AB;&#x6253;&#x6807;&#x7B7E;&#x5BF9;&#x8C61;&#x7684;&#x6587;&#x4EF6;&#x7C7B;&#x578B;</p>
+</blockquote>
+<p><img src="../img/9.jpeg" alt=""></p>
+<h3 id="&#x6307;&#x9488;&#x6587;&#x4EF6;&#x5939;refs">&#x6307;&#x9488;&#x6587;&#x4EF6;&#x5939;refs</h3>
+<blockquote>
+<p>&#x5207;&#x56DE;&#x7248;&#x672C;&#x53EA;&#x8981;&#x6539;&#x6389;&#x6307;&#x5411;&#x53E6;&#x4E00;&#x4E2A;commit&#x7684;hash&#x503C;&#x5373;&#x53EF;</p>
+<p>&#x6BCF;&#x6B21;commit&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x6709;&#x53D8;&#x5316;&#x5C31;&#x4F1A;&#x751F;&#x6210;&#x65B0;&#x7684;hash&#xFF0C;&#x6307;&#x9488;&#x4F1A;&#x81EA;&#x52A8;&#x6307;&#x5411;&#x65B0;&#x7684;hash</p>
+<p>&#x5207;&#x6362;&#x5DE5;&#x4F5C;&#x6811;&#xFF0C;&#x5B9E;&#x9645;&#x53EA;&#x8981;&#x627E;&#x5230;&#x5F53;&#x524D;&#x7684;commit&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x628A;blob&#x6587;&#x4EF6;&#x56DE;&#x5199;&#x5230;&#x6587;&#x4EF6;&#x4E2D;&#x5373;&#x53EF;</p>
+</blockquote>
+<p><img src="../img/10.jpeg" alt="">
+<img src="../img/11.jpeg" alt=""></p>
+<h2 id="&#x672C;&#x5730;&#x4ED3;&#x5E93;">&#x672C;&#x5730;&#x4ED3;&#x5E93;</h2>
+<blockquote>
+<p>&#x6BCF;&#x4E2A;&#x7248;&#x672C;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5FEB;&#x7167;&#xFF0C;&#x56FE;&#x4E2D;&#x603B;&#x5171;&#x6709;6&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5176;&#x4E2D;&#x6709;4&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;A1,B1,A,B&#xFF0C;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x91CD;&#x590D;&#x8FD9;4&#x4E2A;&#x6587;&#x4EF6;&#x4E5F;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x5C06;&#x5176;&#x53EA;&#x4FDD;&#x5B58;&#x4E00;&#x4EFD;&#xFF0C;sha-1&#x7B97;&#x6CD5;</p>
+</blockquote>
+<p><img src="https://dn-coding-net-production-pp.qbox.me/f1e4cbe9-1f7d-4826-8a61-1f7d065e43ce.png" alt=""></p>
+<h3 id="&#x4F7F;&#x7528;sha-1&#x7B97;&#x6CD5;">&#x4F7F;&#x7528;sha-1&#x7B97;&#x6CD5;</h3>
+<blockquote>
+<p>SHA-1&#x5C06;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x901A;&#x8FC7;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x751F;&#x6210;&#x4E00;&#x4E2A; 40 &#x4F4D;&#x957F;&#x5EA6;&#x7684;hash&#x503C;&#x3002;&#x7279;&#x70B9;&#xFF1A;1.&#x7531;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x7B97;&#x51FA;hash&#x503C;2.hash&#x503C;&#x76F8;&#x540C;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x76F8;&#x540C;</p>
+</blockquote>
+<pre><code class="lang-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;test content&apos;</span> | git <span class="hljs-built_in">hash</span>-object --stdin
+d670460b4b4aece5915caf5c68d12f560a9fe3e4
+</code></pre>
+<h3 id="&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x76F8;&#x540C;&#xFF0C;hash&#x503C;&#x76F8;&#x540C;">&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x76F8;&#x540C;&#xFF0C;hash&#x503C;&#x76F8;&#x540C;</h3>
+<pre><code>graph LR
+A --&gt; A
+
+d6704 --&gt; d6704
+</code></pre><h3 id="hashid&#x6587;&#x4EF6;&#x590D;&#x7528;">hashid&#x6587;&#x4EF6;&#x590D;&#x7528;</h3>
+<blockquote>
+<p>&#x5229;&#x7528;sha-1&#x751F;&#x6210;&#x7684;id&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x8FD9;&#x4E2A;id&#x6765;&#x590D;&#x7528;&#x6587;&#x4EF6;,&#x5F53;&#x6587;&#x4EF6;&#x6CA1;&#x6709;&#x53D8;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x590D;&#x7528;&#x8FD9;&#x4E2A;hash,&#x5F53;&#x6587;&#x4EF6;&#x53D8;&#x52A8;&#x65F6;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x91CD;&#x65B0;&#x751F;&#x6210;&#x65B0;&#x7684;hash&#xFF0C;&#x7ED9;&#x540E;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x5F15;&#x7528;</p>
+</blockquote>
+<p><img src="https://dn-coding-net-production-pp.qbox.me/ededf2f2-9c29-4234-92f6-5c89d12bce3d.png" alt=""></p>
+<h3 id="gitobject-&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x5E93;">.git/object &#x5BF9;&#x8C61;&#x6570;&#x636E;&#x5E93;</h3>
+<blockquote>
+<p>&#x4F7F;&#x7528;hash-1&#x524D;2&#x4F4D;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x540E;38&#x4F4D;&#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x540D;</p>
+</blockquote>
+<p><img src="https://dn-coding-net-production-pp.qbox.me/e494e331-4bde-4bc0-850f-678121f829c9.png" alt=""></p>
+<h3 id="obj&#x6587;&#x4EF6;&#x5206;&#x7C7B;">obj&#x6587;&#x4EF6;&#x5206;&#x7C7B;</h3>
+<blockquote>
+<p>&#x5206;&#x4E3A;4&#x7C7B; blob,tree,commit,tag</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x578B;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blob</td>
+<td>&#x9996;&#x5148; A&#x3001;A1&#x3001;B&#x3001;B1 &#x5C31;&#x662F; blob &#x7C7B;&#x578B;&#x7684; obj&#x3002;blob: &#x7528;&#x6765;&#x5B58;&#x653E;&#x9879;&#x76EE;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x5305;&#x62EC;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#x3001;&#x540D;&#x5B57;&#x3001;&#x683C;&#x5F0F;&#x7B49;&#x5176;&#x5B83;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#x3002;&#x9879;&#x76EE;&#x7684;&#x4EFB;&#x610F;&#x6587;&#x4EF6;&#x7684;&#x4EFB;&#x610F;&#x7248;&#x672C;&#x90FD;&#x662F;&#x4EE5;blob&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x653E;&#x7684;</td>
+</tr>
+<tr>
+<td>tree</td>
+<td>&#x7528;&#x6765;&#x8868;&#x793A;&#x76EE;&#x5F55;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x9879;&#x76EE;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x76EE;&#x5F55;&#x4E2D;&#x6709;&#x6587;&#x4EF6;&#x3001;&#x6709;&#x5B50;&#x76EE;&#x5F55;&#x3002;&#x56E0;&#x6B64; tree &#x4E2D;&#x6709; blob&#x3001;&#x5B50;tree&#xFF0C;&#x4E14;&#x90FD;&#x662F;&#x4F7F;&#x7528; sha-1&#x503C;&#x5F15;&#x7528;&#x7684;&#x3002;&#x8FD9;&#x662F;&#x4E0E;&#x76EE;&#x5F55;&#x5BF9;&#x5E94;&#x7684;&#x3002;&#x4ECE;&#x9876;&#x5C42;&#x7684; tree &#x7EB5;&#x89C8;&#x6574;&#x4E2A;&#x6811;&#x72B6;&#x7684;&#x7ED3;&#x6784;&#xFF0C;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x5C31;&#x662F;blob&#xFF0C;&#x8868;&#x793A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x975E;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#x8868;&#x793A;&#x9879;&#x76EE;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x9876;&#x5C42;&#x7684; tree &#x5BF9;&#x8C61;&#x5C31;&#x4EE3;&#x8868;&#x4E86;&#x5F53;&#x524D;&#x9879;&#x76EE;&#x7684;&#x5FEB;&#x7167;&#x3002;</td>
+</tr>
+<tr>
+<td>commit</td>
+<td>&#x8868;&#x793A;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#xFF0C;&#x6709;parent&#x5B57;&#x6BB5;&#xFF0C;&#x7528;&#x6765;&#x5F15;&#x7528;&#x7236;&#x63D0;&#x4EA4;&#x3002;&#x6307;&#x5411;&#x4E86;&#x4E00;&#x4E2A;&#x9876;&#x5C42; tree&#xFF0C;&#x8868;&#x793A;&#x4E86;&#x9879;&#x76EE;&#x7684;&#x5FEB;&#x7167;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x5176;&#x5B83;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x4E00;&#x4E2A;&#x63D0;&#x4EA4;&#xFF0C;committer&#x3001;author&#x3001;message &#x7B49;&#x4FE1;&#x606F;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x6682;&#x5B58;&#x533A;">&#x6682;&#x5B58;&#x533A;</h2>
+<h3 id="gitindex">.git/index</h3>
+<blockquote>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x63D0;&#x4EA4;&#xFF08;commit&#xFF09;&#x65F6;&#xFF0C;git &#x4F1A;&#x4F7F;&#x7528;&#x6682;&#x5B58;&#x533A;&#x7684;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x751F;&#x6210;tree&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x9879;&#x76EE;&#x5FEB;&#x7167;&#xFF0C;&#x6C38;&#x4E45;&#x4FDD;&#x5B58;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x3002;&#x56E0;&#x6B64;&#x4E5F;&#x53EF;&#x4EE5;&#x8BF4;&#x6682;&#x5B58;&#x533A;&#x662F;&#x7528;&#x6765;&#x6784;&#x5EFA;&#x9879;&#x76EE;&#x5FEB;&#x7167;&#x7684;&#x533A;&#x57DF;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-bash">$  git ls-files --stage
+</code></pre>
+<p><img src="https://dn-coding-net-production-pp.qbox.me/a2897509-382d-4a2a-9d94-4c4d8e8a4051.bmp" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>&#x5217;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>&#x7B2C;&#x4E8C;&#x5217;&#x5C31;&#x662F;sha-1 hash&#x503C;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x5185;&#x5BB9;&#x7684;&#x5916;&#x952E;&#xFF0C;&#x6307;&#x5411;&#x4E86;&#x5B9E;&#x9645;&#x5B58;&#x50A8;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x7684;blob&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>&#x7B2C;&#x4E09;&#x5217;&#x662F;&#x6587;&#x4EF6;&#x7684;&#x51B2;&#x7A81;&#x72B6;&#x6001;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>&#x7B2C;&#x56DB;&#x5217;&#x662F;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#x540D;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="git原理.html" class="navigation navigation-next navigation-unique" aria-label="Next page: git原理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"git","level":"1.1","depth":1,"next":{"title":"git原理","level":"1.1.1","depth":2,"path":"git/git原理.md","ref":"git/git原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"git/git原理.md","mtime":"2018-07-05T15:17:34.924Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-05T15:39:39.267Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
